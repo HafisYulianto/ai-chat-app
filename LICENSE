@@ -1,0 +1,26 @@
+
+---
+
+## `CONTRIBUTING.md`
+```markdown
+# Contributing
+
+Terima kasih ingin berkontribusi! 🎉
+
+## Alur Singkat
+1. Fork repo ini
+2. Buat branch fitur: `git checkout -b feat/nama-fitur`
+3. Commit rapi:
+   - `feat: ...` untuk fitur
+   - `fix: ...` untuk perbaikan bug
+   - `docs: ...` untuk dokumentasi
+4. Push branch: `git push origin feat/nama-fitur`
+5. Buka Pull Request dan jelaskan perubahan
+
+## Gaya Kode
+- Gunakan ESM (import/export)
+- Hindari hardcode secrets
+- Tambah komentar pada bagian penting
+
+## Issue
+- Sertakan langkah reproduksi, ekspektasi vs realita, dan screenshot/log bila perlu.
