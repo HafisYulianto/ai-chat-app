@@ -6,6 +6,7 @@
  *   Enter = kirim, Shift+Enter = baris baru
  * =======================================================*/
 
+const resetBtn = document.getElementById('resetBtn');
 const chatContainer = document.getElementById('chatContainer');
 const chatForm = document.getElementById('chatForm');
 const userInput = document.getElementById('userInput');
@@ -227,3 +228,16 @@ async function safeJson(res) {
 loadHistory();
 scrollToBottom();
 syncThemeIcon(); // sinkronkan ikon saat halaman pertama kali dibuka
+
+/* ---------- Reset chat (hapus semua history) ---------- */
+resetBtn.addEventListener('click', () => {
+  const ok = confirm('Hapus semua riwayat chat di perangkat ini?');
+  if (!ok) return;
+
+  // kosongkan data & UI
+  history = [];
+  try { localStorage.removeItem(LS_KEY); } catch (_) {}
+  chatContainer.innerHTML = '';
+  hideTyping();
+  scrollToBottom();
+});
