@@ -11,6 +11,8 @@ const chatContainer = document.getElementById('chatContainer');
 const chatForm = document.getElementById('chatForm');
 const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
+const sendBtnText = document.getElementById('sendBtnText');
+const sendSpinner = document.getElementById('sendSpinner');
 const exportTxtBtn = document.getElementById('exportTxtBtn');
 const exportPdfBtn = document.getElementById('exportPdfBtn');
 const themeToggle = document.getElementById('themeToggle');
@@ -42,6 +44,20 @@ function appendBubble(role, text, time = nowTime()) {
   const node = tpl.content.cloneNode(true);
   node.querySelector('p').textContent = text;
   node.querySelector('.time').textContent = time;
+
+  // Tombol copy pakai simbol 📋
+  const copyBtn = document.createElement('button');
+  copyBtn.textContent = 'Copy';
+  copyBtn.className = 'ml-2 text-xs text-teal-600 hover:underline';
+  copyBtn.type = 'button';
+  copyBtn.title = 'Salin ke clipboard';
+  copyBtn.onclick = () => {
+    navigator.clipboard.writeText(text);
+    copyBtn.textContent = '✅';
+    setTimeout(() => (copyBtn.textContent = '📋'), 1000);
+  };
+  node.querySelector('.bubble').appendChild(copyBtn);
+
   chatContainer.appendChild(node);
   scrollToBottom();
 }
@@ -196,6 +212,10 @@ chatForm.addEventListener('submit', async (e) => {
 
 function disableSend(disabled) {
   sendBtn.disabled = disabled;
+  if (sendBtnText && sendSpinner) {
+    sendBtnText.classList.toggle('hidden', disabled);
+    sendSpinner.classList.toggle('hidden', !disabled);
+  }
 }
 
 /* ---------- Auto-resize textarea ---------- */

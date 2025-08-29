@@ -69,10 +69,16 @@
     <footer class="sticky bottom-0 bg-white/80 dark:bg-gray-900/80 border-t border-gray-200 dark:border-gray-800">
       <form id="chatForm" class="max-w-3xl mx-auto px-4 py-3 flex items-end gap-2">
         <textarea id="userInput" rows="1"
-          placeholder="Tulis pertanyaan kamu… (Enter = kirim, Shift+Enter = baris baru)"
+          placeholder="Tulis pertanyaan kamu…"
           class="flex-1 resize-none rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
           maxlength="500" required></textarea>
-        <button id="sendBtn" type="submit" class="btn-primary">Kirim</button>
+        <button id="sendBtn" type="submit" class="btn-primary flex items-center gap-2">
+          <span id="sendBtnText">Kirim</span>
+          <svg id="sendSpinner" class="w-4 h-4 animate-spin hidden" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+          </svg>
+        </button>
       </form>
     </footer>
   </div>
