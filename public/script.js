@@ -57,6 +57,7 @@ function appendBubble(role, text, time = nowTime()) {
     setTimeout(() => (copyBtn.textContent = '📋'), 1000);
   };
   node.querySelector('.bubble').appendChild(copyBtn);
+  node.querySelector('.bubble').classList.add('bubble-animate');
 
   chatContainer.appendChild(node);
   scrollToBottom();
@@ -261,3 +262,56 @@ resetBtn.addEventListener('click', () => {
   hideTyping();
   scrollToBottom();
 });
+
+const emojiBtn = document.getElementById('emojiBtn');
+const emojiList = [
+  '😀','😁','😂','🤣','😊','😍','😎','😢','😭','😡','😅','😴','🤔','🥳',
+  '👍','👎','🙏','👏','🙌','👌','✌️','🤝','🤟','👋',
+  '❤️','💔','💕','🔥','✨','🎉','💯',
+  '🌹','🌸','🌻','🌈','☀️','🌙','⭐',
+  '🐶','🐱','🐭','🐵','🐧','🐼',
+  '🍎','🍊','🍉','🍇','🍔','🍟','🍕','🍩','🍪','☕',
+  '🚗','✈️','🚀','🏠','🏫',
+  '💻','📱','📷','🔑','💡',
+  '🇮🇩','🇯🇵','🇺🇸'
+];
+
+
+let emojiPicker;
+emojiBtn.addEventListener('click', () => {
+  // Hapus picker jika sudah ada
+  if (emojiPicker) {
+    emojiPicker.remove();
+    emojiPicker = null;
+    return;
+  }
+  emojiPicker = document.createElement('div');
+  emojiPicker.className = 'absolute bg-white dark:bg-gray-800 border rounded shadow p-2 flex flex-wrap gap-1 z-50';
+  emojiPicker.style.bottom = '60px';
+  emojiPicker.style.left = emojiBtn.getBoundingClientRect().left + 'px';
+  emojiList.forEach(e => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = e;
+    btn.className = 'text-xl hover:bg-gray-100 dark:hover:bg-gray-700 rounded px-1';
+    btn.onclick = () => {
+      userInput.value += e;
+      userInput.focus();
+      emojiPicker.remove();
+      emojiPicker = null;
+    };
+    emojiPicker.appendChild(btn);
+  });
+  document.body.appendChild(emojiPicker);
+
+  // Tutup picker jika klik di luar
+  setTimeout(() => {
+    document.addEventListener('click', closeEmojiPicker, { once: true });
+  }, 10);
+});
+function closeEmojiPicker(e) {
+  if (emojiPicker && !emojiPicker.contains(e.target) && e.target !== emojiBtn) {
+    emojiPicker.remove();
+    emojiPicker = null;
+  }
+}

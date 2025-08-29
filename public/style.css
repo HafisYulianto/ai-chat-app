@@ -94,3 +94,11 @@
 @supports (padding: max(0px)) {
   footer form { padding-bottom: max(env(safe-area-inset-bottom), 12px); }
 }
+
+@keyframes bubbleIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95);}
+  to   { opacity: 1; transform: translateY(0) scale(1);}
+}
+.bubble-animate {
+  animation: bubbleIn 0.25s cubic-bezier(.4,0,.2,1);
+}
